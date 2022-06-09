@@ -12,35 +12,34 @@ namespace RabbitMQ.Publisher
         {
             var factory = new ConnectionFactory()
             {
-                HostName = rabbitConnection.HostName,
-                UserName = rabbitConnection.Username,
-                Password = rabbitConnection.Password
+                HostName = "localhost",
+                UserName = "guest",
+                Password = "guest"
             };
 
             var connection = factory.CreateConnection();
 
-            using (var channel = connection.CreateModel())
-            {
-                channel.QueueDeclare(queue: rabbitMessage.RoutingKey,
-                                     durable: false,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
+            using var channel = connection.CreateModel();
 
-                var message = rabbitMessage.Payload;
+            channel.QueueDeclare(queue: rabbitMessage.RoutingKey,
+                                 durable: false,
+                                 exclusive: false,
+                                 autoDelete: false,
+                                 arguments: null);
 
-                var body = Encoding.UTF8.GetBytes(message);
+            var message = rabbitMessage.Payload;
 
-                IBasicProperties properties = channel.CreateBasicProperties();
+            var body = Encoding.UTF8.GetBytes(message);
 
-                properties.Persistent = true;
+            IBasicProperties properties = channel.CreateBasicProperties();
 
-                properties.DeliveryMode = (int)DeliveryMode.Persistent;
+            properties.Persistent = true;
 
-                channel.BasicPublish(exchange : rabbitMessage.Exchange ?? "",
-                                     routingKey: rabbitMessage.RoutingKey,
-                                     body: body);
-            }
+            properties.DeliveryMode = (int)DeliveryMode.Persistent;
+
+            channel.BasicPublish(exchange: rabbitMessage.Exchange ?? "",
+                                 routingKey: rabbitMessage.RoutingKey,
+                                 body: body);
         }
     }
 }
