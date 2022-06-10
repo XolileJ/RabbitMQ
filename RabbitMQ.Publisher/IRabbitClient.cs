@@ -3,6 +3,7 @@
     public interface IRabbitClient
     {
         void Publish(RabbitConnection rabbitConnection, RabbitMessage rabbitMessage);
+        string Consume(RabbitConnection rabbitConnection, RabbitMessage rabbitMessage);
 
         RabbitMessage RabbitMessage { get; set; }
 

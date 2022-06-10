@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.Publisher", "Rabbi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sender", "Sender\Sender.csproj", "{5356B9A0-65A8-4050-92F0-E3189A1307EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reciever", "Reciever\Reciever.csproj", "{B007CAC0-5AC1-4518-ABE4-CB14CECAE71B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{5356B9A0-65A8-4050-92F0-E3189A1307EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5356B9A0-65A8-4050-92F0-E3189A1307EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5356B9A0-65A8-4050-92F0-E3189A1307EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B007CAC0-5AC1-4518-ABE4-CB14CECAE71B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B007CAC0-5AC1-4518-ABE4-CB14CECAE71B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B007CAC0-5AC1-4518-ABE4-CB14CECAE71B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B007CAC0-5AC1-4518-ABE4-CB14CECAE71B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3B69036C-4CD5-49E0-B055-6D51C1453805} = {2BDEBB81-CD6A-4D7F-B594-1A177039E88E}
 		{5356B9A0-65A8-4050-92F0-E3189A1307EE} = {2BDEBB81-CD6A-4D7F-B594-1A177039E88E}
+		{B007CAC0-5AC1-4518-ABE4-CB14CECAE71B} = {2BDEBB81-CD6A-4D7F-B594-1A177039E88E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {88DED967-A17D-4D02-8034-017D3EEB36D5}
