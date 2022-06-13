@@ -1,6 +1,8 @@
 ﻿using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace RabbitMQ.Publisher
 {
@@ -40,8 +42,11 @@ namespace RabbitMQ.Publisher
 
         public string Consume(RabbitConnection rabbitConnection, RabbitMessage rabbitMessage)
         {
-            //To do: Investigate auto delete message from queue
-            ConnectionFactory factory = CreateConnectionFactory();
+            var factory = new ConnectionFactory() {
+                HostName = "localhost",
+                UserName = "guest",
+                Password = "guest",
+                DispatchConsumersAsync = true };
 
             var connection = factory.CreateConnection();
 
@@ -50,16 +55,18 @@ namespace RabbitMQ.Publisher
             channel.QueueDeclare(queue: rabbitMessage.RoutingKey ?? "Name",
                                  durable: false,
                                  exclusive: false,
-                                 autoDelete: true,
+                                 autoDelete: false,
                                  arguments: null);
 
-            var consumer = new EventingBasicConsumer(channel);
+            var consumer = new AsyncEventingBasicConsumer(channel);
 
             string name = "";
 
-            consumer.Received += (model, ea) =>
+            consumer.Received += async (model, ea) =>
             {
                 var body = ea.Body.ToArray();
+
+                await Task.Delay(1000);
 
                 name = Encoding.UTF8.GetString(body);
             };

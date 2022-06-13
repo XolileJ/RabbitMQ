@@ -7,20 +7,24 @@ namespace Sender
     {
         static void Main(string[] args)
         {
-            IRabbitClient rabbitClient = new RabbitClient();
-
-            Console.Write("Hi, please enter your Name: ");
-
-            rabbitClient.RabbitMessage = new RabbitMessage()
+            try
             {
-                RoutingKey = "Name",
-                Payload = Console.ReadLine()
-            };
+                IRabbitClient rabbitClient = new RabbitClient();
 
-            rabbitClient.Publish(rabbitClient.RabbitConnection, rabbitClient.RabbitMessage);
+                Console.Write("Hi, please enter your Name: ");
 
-            Console.WriteLine($"Hi {rabbitClient.RabbitMessage.Payload}!");
-            Console.ReadLine();
+                rabbitClient.RabbitMessage = new RabbitMessage()
+                {
+                    RoutingKey = "Name",
+                    Payload = Console.ReadLine()
+                };
+
+                rabbitClient.Publish(rabbitClient.RabbitConnection, rabbitClient.RabbitMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }
