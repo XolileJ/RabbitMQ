@@ -7,18 +7,23 @@ namespace Reciever
     {
         static void Main(string[] args)
         {
-            IRabbitClient rabbitClient = new RabbitClient();
-
-            rabbitClient.RabbitMessage = new RabbitMessage()
+            try
             {
-                RoutingKey = "Name"
-            };
+                IRabbitClient rabbitClient = new RabbitClient();
 
-            var name = rabbitClient.Consume(rabbitClient.RabbitConnection, rabbitClient.RabbitMessage);
+                rabbitClient.RabbitMessage = new RabbitMessage()
+                {
+                    RoutingKey = "Name"
+                };
 
-            Console.WriteLine($"Hello {name}, I am your father!");
+                var name = rabbitClient.Consume(rabbitClient.RabbitConnection, rabbitClient.RabbitMessage);
 
-            Console.ReadLine();
+                Console.WriteLine($"Hello {name}, I am your father!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }
